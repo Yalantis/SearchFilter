@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_height">45dp</dimen>
+    <dimen name="container_height">53dp</dimen>
+    <dimen name="container_margin">53.8dp</dimen>
+    <dimen name="item_half_height">22.5dp</dimen>
+    <dimen name="margin">6dp</dimen>
+</resources>

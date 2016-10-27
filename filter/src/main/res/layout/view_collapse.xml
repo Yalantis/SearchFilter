@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/item_height"
+    android:layout_height="@dimen/item_height">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonOk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:textColor="#827f93"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/imageArrow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="11dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow"
+        android:tint="#827f93" />
+</FrameLayout>

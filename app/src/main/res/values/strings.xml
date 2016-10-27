@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FitFilter</string>
+    <string name="str_all_selected">All categories</string>
+
+    <string-array name="job_titles">
+        <item>All categories</item>
+        <item>Design</item>
+        <item>iOS development</item>
+        <item>Android development</item>
+        <item>Web development</item>
+        <item>Business analysis</item>
+        <item>Research</item>
+        <item>Sales</item>
+        <item>Quality assurance</item>
+        <item>Customer support</item>
+        <item>Other</item>
+    </string-array>
+</resources>

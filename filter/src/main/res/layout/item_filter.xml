@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipChildren="false">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/viewLeft"
+            android:layout_width="@dimen/item_height"
+            android:layout_height="@dimen/item_height"
+            android:layout_marginEnd="-22.5dp"
+            android:layout_marginRight="-22.5dp"
+            android:background="@drawable/item_shape"
+            android:rotation="90" />
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/viewRight"
+            android:layout_width="@dimen/item_height"
+            android:layout_height="@dimen/item_height"
+            android:layout_marginLeft="-22.5dp"
+            android:layout_marginStart="-22.5dp"
+            android:layout_toEndOf="@+id/textBackground"
+            android:layout_toRightOf="@+id/textBackground"
+            android:background="@drawable/item_shape"
+            android:rotation="270" />
+
+        <RelativeLayout
+            android:id="@+id/textBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_height"
+            android:layout_toRightOf="@id/viewLeft"
+            android:background="@android:color/holo_red_dark">
+
+            <View
+                android:id="@+id/topStroke"
+                android:layout_width="wrap_content"
+                android:layout_height="1.25dp"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignRight="@+id/textView" />
+
+            <View
+                android:id="@+id/bottomStroke"
+                android:layout_width="wrap_content"
+                android:layout_height="1.25dp"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/textView" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="Test filter item"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/buttonCancel"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:padding="14dp"
+        android:scaleType="fitCenter" />
+
+</FrameLayout>

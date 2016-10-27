@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <View
+        android:id="@+id/dividerTop"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#E4E6E3" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/dividerTop"
+        android:layout_margin="16dp"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:roundAsCircle="true"
+        fresco:roundWithOverlayColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/avatar"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/avatar"
+        android:layout_toLeftOf="@+id/text_date"
+        android:layout_toStartOf="@+id/text_date"
+        android:text="Carol Bell"
+        android:textColor="#827f93"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/text_name"
+        android:layout_below="@+id/text_name"
+        android:layout_marginBottom="10dp"
+        android:text="Graphic Designer"
+        android:textColor="#827f93" />
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/dividerTop"
+        android:layout_margin="26dp"
+        android:text="Nov 20, 6:12 PM"
+        android:textColor="#827f93" />
+
+    <TextView
+        android:id="@+id/filter_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avatar"
+        android:layout_marginLeft="16dp"
+        android:padding="10dp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/filter_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/filter_first"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/filter_first"
+        android:padding="10dp"
+        android:textColor="@android:color/white" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/text_question"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#ebebeb" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view_likes"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_heart"
+        android:tint="#827f93" />
+
+    <TextView
+        android:id="@+id/text_likes_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view_likes"
+        android:layout_margin="4dp"
+        android:layout_toEndOf="@+id/view_likes"
+        android:text="24"
+        android:textColor="#827f93"
+        android:textSize="12sp" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view_chat"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_chat"
+        android:tint="#827f93" />
+
+    <TextView
+        android:id="@+id/text_chat_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view_chat"
+        android:layout_margin="4dp"
+        android:layout_toEndOf="@+id/view_chat"
+        android:text="20 responses"
+        android:textColor="#827f93"
+        android:textSize="12sp" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view_settings"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/divider"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_more"
+        android:tint="#827f93" />
+
+    <TextView
+        android:id="@+id/text_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filter_first"
+        android:layout_margin="16dp"
+        android:text="What is the first step to transform an idea into an actual project?"
+        android:textColor="#827f93" />
+
+</RelativeLayout>

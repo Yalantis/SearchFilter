@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <View
+        android:id="@+id/dividerTop"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentTop="true"
+        android:background="#b2b6c6" />
+
+    <View
+        android:id="@+id/dividerBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/collapsedFilterScroll"
+        android:background="#b2b6c6" />
+
+    <TextView
+        android:id="@+id/collapsedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:textColor="#827f93"
+        android:textSize="18sp"
+        tools:text="All categories" />
+
+    <HorizontalScrollView
+        android:id="@+id/collapsedFilterScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/container_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dividerTop"
+        android:layout_toLeftOf="@+id/collapseView">
+
+        <com.yalantis.filter.widget.CollapsedFilterView
+            android:id="@+id/collapsedFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/container_height" />
+
+    </HorizontalScrollView>
+
+    <com.yalantis.filter.widget.CollapseView
+        android:id="@+id/collapseView"
+        android:layout_width="@dimen/item_height"
+        android:layout_height="@dimen/item_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

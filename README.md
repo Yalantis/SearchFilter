@@ -10,6 +10,8 @@ Read how we did it [on our blog](https://yalantis.com/blog/develop-filter-animat
 
 <img src="gif/dribbble.gif"/>
 
+[Review demo app](https://appetize.io/app/xcvtc917r1qcbtt87r6gxwn3fc)
+
 ##Requirements
 - Android SDK 18+
 

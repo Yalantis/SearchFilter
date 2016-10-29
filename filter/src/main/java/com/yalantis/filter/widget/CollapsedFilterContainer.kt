@@ -39,18 +39,18 @@ class CollapsedFilterContainer : RelativeLayout {
                 mStartY = event.y
             }
             MotionEvent.ACTION_UP -> {
-                if (isClick(mStartX, mStartY, event.x, event.y)) {
+                if (!collapsedFilter.isBusy && isClick(mStartX, mStartY, event.x, event.y)) {
                     listener?.toggle()
                     mStartX = 0f
                     mStartY = 0f
                 }
             }
             MotionEvent.ACTION_MOVE -> {
-                if (Math.abs(mStartX - event.x) < 20 && event.y - mStartY > 20) {
+                if (!collapsedFilter.isBusy && Math.abs(mStartX - event.x) < 20 && event.y - mStartY > 20) {
                     listener?.expand()
                     mStartX = 0f
                     mStartY = 0f
-                } else if (Math.abs(mStartX - event.x) < 20 && event.y - mStartY < -20) {
+                } else if (!collapsedFilter.isBusy && Math.abs(mStartX - event.x) < 20 && event.y - mStartY < -20) {
                     listener?.collapse()
                     mStartX = 0f
                     mStartY = 0f

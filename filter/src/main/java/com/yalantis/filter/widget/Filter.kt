@@ -43,6 +43,8 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
             collapseView.setHasText(value)
         }
 
+    private var mIsBusy = false
+
     private var isCollapsed: Boolean? = null
 
     private val STATE_SUPER = "state_super"
@@ -94,6 +96,8 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
     }
 
     private fun collapse(duration: Long) {
+        if (mIsBusy || collapsedFilter.isBusy) return
+        mIsBusy = true
         mRemovedFilters.clear()
 
         isCollapsed = true
@@ -148,6 +152,7 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
                 if (ratio == 1f) {
                     collapsedContainer.bringToFront()
                     collapsedContainer.requestFocus()
+                    mIsBusy = false
                 }
             }
         }.start()
@@ -156,6 +161,9 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
     }
 
     override fun expand() {
+        if (collapsedFilter.isBusy || mIsBusy) return
+
+        mIsBusy = true
 
         isCollapsed = false
 
@@ -209,6 +217,7 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
                     expandedFilterScroll.bringToFront()
                     expandedFilterScroll.requestFocus()
                     collapsedText.visibility = View.GONE
+                    mIsBusy = false
                 }
             }
         }.start()
@@ -365,6 +374,10 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
         }
     }
 
-    override fun toggle(): Unit = if (isCollapsed != null && isCollapsed as Boolean) expand() else collapse()
+    override fun toggle() {
+        if (collapsedFilter.isBusy || mIsBusy) return
+
+        if (isCollapsed != null && isCollapsed as Boolean) expand() else collapse()
+    }
 
 }

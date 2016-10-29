@@ -47,6 +47,8 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
         mFilter = (Filter<Tag>) findViewById(R.id.filter);
         mFilter.setAdapter(new Adapter(getTags()));
         mFilter.setListener(this);
+
+        //the text to show when there's no selected items
         mFilter.setNoSelectedItemText(getString(R.string.str_all_selected));
         mFilter.build();
 
@@ -190,4 +192,5 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
             return filterItem;
         }
     }
+
 }

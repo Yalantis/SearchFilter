@@ -4,13 +4,15 @@
 [![](https://jitpack.io/v/yalantis/searchfilter.svg)](https://jitpack.io/#yalantis/searchfilter)
 [![Yalantis](https://raw.githubusercontent.com/Yalantis/PullToRefresh/develop/PullToRefreshDemo/Resources/badge_dark.png)](https://yalantis.com/?utm_source=github)
 
+<a href="https://play.google.com/store/apps/details?id=com.yalantis.fitfilter"><img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" /></a>
+
+[Live DEMO on appetize.io](https://appetize.io/app/3jke81pv6zuv9b4mt4gc53afc4)
+
 Check this [project on dribbble](https://dribbble.com/shots/2818273-Female-in-IT-Filters)
 
 Read how we did it [on our blog](https://yalantis.com/blog/develop-filter-animation-kotlin-android/)
 
 <img src="gif/dribbble.gif"/>
-
-[Review demo app](https://appetize.io/app/3jke81pv6zuv9b4mt4gc53afc4)
 
 ##Requirements
 - Android SDK 18+

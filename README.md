@@ -32,7 +32,7 @@ allprojects {
 Add the dependency:
 ```Groovy
 dependencies {
-	        compile 'com.github.yalantis:searchfilter:v1.0.0'
+	compile 'com.github.yalantis:searchfilter:v1.0.1'
 }
 ```
 

@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.yalantis.fitfilter"
         minSdkVersion 18
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }

@@ -2,6 +2,7 @@ package com.yalantis.filter.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Canvas
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.ColorInt
@@ -30,6 +31,10 @@ class FilterItem : FrameLayout, Serializable {
     var startY: Float = 0f
     @ColorInt var cancelIconTint: Int = android.R.color.white
     @DrawableRes var cancelIcon: Int = R.drawable.ic_cancel
+    set(value) {
+        field = value
+        invalidate()
+    }
     @ColorInt var color: Int? = null
     @ColorInt var checkedColor: Int? = null
     @ColorInt var strokeColor: Int? = null
@@ -95,13 +100,13 @@ class FilterItem : FrameLayout, Serializable {
             }
         }
         buttonCancel.supportBackgroundTintList = ColorStateList.valueOf(getColor(cancelIconTint))
-        buttonCancel.setBackgroundDrawable(resources.getDrawable(cancelIcon))
+
         isIncreased = true
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        buttonCancel.setBackgroundDrawable(resources.getDrawable(cancelIcon))
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
         if (fullSize == 0) {
             fullSize = measuredWidth
         }

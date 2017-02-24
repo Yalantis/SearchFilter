@@ -2,12 +2,14 @@ package com.yalantis.filter.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Canvas
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -95,13 +97,12 @@ class FilterItem : FrameLayout, Serializable {
             }
         }
         buttonCancel.supportBackgroundTintList = ColorStateList.valueOf(getColor(cancelIconTint))
-        buttonCancel.setBackgroundDrawable(resources.getDrawable(cancelIcon))
         isIncreased = true
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
+        buttonCancel.setBackgroundResource(cancelIcon)
         if (fullSize == 0) {
             fullSize = measuredWidth
         }

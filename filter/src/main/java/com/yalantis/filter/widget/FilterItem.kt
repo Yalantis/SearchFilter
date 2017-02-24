@@ -31,10 +31,6 @@ class FilterItem : FrameLayout, Serializable {
     var startY: Float = 0f
     @ColorInt var cancelIconTint: Int = android.R.color.white
     @DrawableRes var cancelIcon: Int = R.drawable.ic_cancel
-    set(value) {
-        field = value
-        invalidate()
-    }
     @ColorInt var color: Int? = null
     @ColorInt var checkedColor: Int? = null
     @ColorInt var strokeColor: Int? = null
@@ -100,7 +96,6 @@ class FilterItem : FrameLayout, Serializable {
             }
         }
         buttonCancel.supportBackgroundTintList = ColorStateList.valueOf(getColor(cancelIconTint))
-
         isIncreased = true
     }
 

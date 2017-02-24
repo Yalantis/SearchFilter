@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -100,8 +101,8 @@ class FilterItem : FrameLayout, Serializable {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        buttonCancel.setBackgroundDrawable(resources.getDrawable(cancelIcon))
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        buttonCancel.setBackgroundResource(cancelIcon)
         if (fullSize == 0) {
             fullSize = measuredWidth
         }

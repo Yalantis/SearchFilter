@@ -1,6 +1,7 @@
 package com.yalantis.filter.widget
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -18,6 +19,12 @@ class CollapsedFilterContainer : RelativeLayout {
 
     private var mStartX = 0f
     private var mStartY = 0f
+
+    var containerBackground = Color.WHITE
+        set(value) {
+            field = value
+            relative_container.setBackgroundColor(value)
+        }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)

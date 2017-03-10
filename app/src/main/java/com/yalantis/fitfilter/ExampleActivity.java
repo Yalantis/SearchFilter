@@ -53,8 +53,6 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
         mFilter.setNoSelectedItemText(getString(R.string.str_all_selected));
         mFilter.build();
 
-        mFilter.setCollapsedBackground(Color.RED);
-        mFilter.setExpandedBackground(Color.BLUE);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

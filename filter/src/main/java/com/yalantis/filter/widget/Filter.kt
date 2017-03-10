@@ -20,6 +20,10 @@ import kotlinx.android.synthetic.main.collapsed_container.view.*
 import kotlinx.android.synthetic.main.filter.view.*
 import java.io.Serializable
 import java.util.*
+import android.content.res.TypedArray
+import android.graphics.Color
+import android.support.annotation.ColorInt
+
 
 /**
  * Created by galata on 08.09.16.
@@ -41,6 +45,20 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
     var replaceArrowByText: Boolean = false
         set(value) {
             collapseView.setHasText(value)
+        }
+
+    var collapsedBackground: Int = Color.WHITE
+        set(value) {
+            field = value
+            collapsedContainer.containerBackground = value
+            collapsedContainer.invalidate()
+        }
+
+    var expandedBackground: Int = Color.WHITE
+        set(value) {
+            field = value
+            expandedFilter.setBackgroundColor(value)
+            expandedFilter.invalidate()
         }
 
     private var mIsBusy = false
@@ -66,6 +84,13 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
         collapsedFilter.scrollListener = this
         collapsedContainer.listener = this
         expandedFilter.listener = this
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.Filter, 0, 0)
+        try {
+            collapsedContainer.containerBackground = attributes.getColor(R.styleable.Filter_collapsedBackground, Color.WHITE)
+            expandedFilter.setBackgroundColor(attributes.getColor(R.styleable.Filter_expandedBackground, Color.WHITE))
+        } finally {
+            attributes.recycle()
+        }
     }
 
     fun build() {

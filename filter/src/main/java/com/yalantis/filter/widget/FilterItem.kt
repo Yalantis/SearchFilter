@@ -54,6 +54,11 @@ class FilterItem : FrameLayout, Serializable {
     var collapsedSize: Int = 0
         get() = viewLeft.width
 
+    var cornerRadius: Float = 100f
+        set(value) {
+            field = value
+            updateBackground()
+        }
     internal var fullSize: Int = 0
     internal var listener: FilterItemListener? = null
 
@@ -190,7 +195,7 @@ class FilterItem : FrameLayout, Serializable {
         val strokeColor = if (isFilterSelected) color else removeAlpha(strokeColor)
 
         val drawable: GradientDrawable = GradientDrawable()
-        drawable.cornerRadius = 100.toFloat()
+        drawable.cornerRadius = cornerRadius
 
         if (color != null) {
             drawable.setColor(color)

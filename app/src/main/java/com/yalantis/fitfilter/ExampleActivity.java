@@ -185,6 +185,7 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
 
             filterItem.setStrokeColor(mColors[0]);
             filterItem.setTextColor(mColors[0]);
+            filterItem.setCornerRadius(14);
             filterItem.setCheckedTextColor(ContextCompat.getColor(ExampleActivity.this, android.R.color.white));
             filterItem.setColor(ContextCompat.getColor(ExampleActivity.this, android.R.color.white));
             filterItem.setCheckedColor(mColors[position]);

@@ -14,10 +14,10 @@ Read how we did it [on our blog](https://yalantis.com/blog/develop-filter-animat
 
 <img src="gif/dribbble.gif"/>
 
-##Requirements
+## Requirements
 - Android SDK 18+
 
-##Usage
+## Usage
 
 Add to your root build.gradle:
 ```Groovy

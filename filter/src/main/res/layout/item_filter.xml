@@ -40,14 +40,14 @@
             <View
                 android:id="@+id/topStroke"
                 android:layout_width="wrap_content"
-                android:layout_height="1.25dp"
+                android:layout_height="1dp"
                 android:layout_alignLeft="@+id/textView"
                 android:layout_alignRight="@+id/textView" />
 
             <View
                 android:id="@+id/bottomStroke"
                 android:layout_width="wrap_content"
-                android:layout_height="1.25dp"
+                android:layout_height="1dp"
                 android:layout_alignLeft="@+id/textView"
                 android:layout_alignParentBottom="true"
                 android:layout_alignRight="@+id/textView" />

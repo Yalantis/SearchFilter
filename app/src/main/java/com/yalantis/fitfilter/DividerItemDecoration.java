@@ -3,7 +3,8 @@ package com.yalantis.fitfilter;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 

@@ -1,9 +1,9 @@
 package com.yalantis.filter.animator
 
 import android.animation.ValueAnimator
-import android.support.v4.animation.AnimatorCompatHelper
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorListener
+import androidx.core.animation.AnimatorCompatHelper
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListener
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SimpleItemAnimator
 import android.view.View

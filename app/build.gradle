@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.yalantis.fitfilter"
-        minSdkVersion 18
-        targetSdkVersion 24
+        minSdkVersion 19
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -20,9 +19,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.facebook.fresco:fresco:0.13.0'
-    compile 'com.android.support:design:24.2.0'
-    compile project(':filter')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation ('com.facebook.fresco:fresco:1.13.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation "org.jetbrains:annotations:15.0"
+    implementation project(':filter')
 }

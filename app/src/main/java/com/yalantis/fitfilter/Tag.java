@@ -1,6 +1,7 @@
 package com.yalantis.fitfilter;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.yalantis.filter.model.FilterModel;
 

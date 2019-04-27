@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:clipChildren="false">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/viewLeft"
             android:layout_width="@dimen/item_height"
             android:layout_height="@dimen/item_height"
@@ -19,7 +19,7 @@
             android:rotation="90" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/viewRight"
             android:layout_width="@dimen/item_height"
             android:layout_height="@dimen/item_height"
@@ -66,7 +66,7 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/buttonCancel"
         android:layout_width="22dp"
         android:layout_height="22dp"

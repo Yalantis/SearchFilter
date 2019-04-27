@@ -3,7 +3,7 @@
     android:layout_width="@dimen/item_height"
     android:layout_height="@dimen/item_height">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonOk"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +15,7 @@
         android:visibility="gone" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageArrow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

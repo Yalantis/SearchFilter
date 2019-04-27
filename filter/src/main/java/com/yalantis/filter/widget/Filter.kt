@@ -22,7 +22,6 @@ import java.io.Serializable
 import java.util.*
 import android.content.res.TypedArray
 import android.graphics.Color
-import android.support.annotation.ColorInt
 
 
 /**

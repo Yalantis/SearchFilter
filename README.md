@@ -63,7 +63,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
@@ -78,7 +78,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentRight="true"

@@ -1,6 +1,7 @@
 package com.yalantis.filter.widget
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -27,7 +28,7 @@ class CollapsedFilterView : ViewGroup {
     constructor(context: Context, attrs: AttributeSet?, defStyleRes: Int) : super(context, attrs, defStyleRes)
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
-        for (i in 0..childCount - 1) {
+        for (i in 0 until childCount) {
             val child: FilterItem = getChildAt(i) as FilterItem
             child.layout(0, 0, child.collapsedSize / 2 + child.measuredWidth / 2 + 1, child.measuredHeight)
         }
@@ -58,7 +59,7 @@ class CollapsedFilterView : ViewGroup {
         ValueAnimator.ofFloat(0f, Constant.ANIMATION_DURATION / 2.toFloat()).setDuration(Constant.ANIMATION_DURATION / 2).apply {
             addUpdateListener {
                 val ratio = it.animatedValue as Float / (Constant.ANIMATION_DURATION / 2)
-                for (i in index + 1..childCount - 1) {
+                for (i in index + 1 until childCount) {
                     val item = getChildAt(i) as FilterItem
 
                     if (ratio == 0f) {
@@ -80,6 +81,7 @@ class CollapsedFilterView : ViewGroup {
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean = childCount > 0
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -107,7 +109,7 @@ class CollapsedFilterView : ViewGroup {
 
 
     private fun findViewByCoord(x: Float): FilterItem? {
-        for (i in 0..childCount - 1) {
+        for (i in 0 until childCount) {
             val item: FilterItem = getChildAt(i) as FilterItem
 
             if (containsCoord(item, x)) {

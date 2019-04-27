@@ -2,12 +2,8 @@ package com.yalantis.filter.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -17,6 +13,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.yalantis.filter.R
 import com.yalantis.filter.listener.FilterItemListener
@@ -41,10 +38,6 @@ class FilterItem : FrameLayout, Serializable {
     @ColorInt var strokeColor: Int? = null
     @ColorInt var checkedTextColor: Int? = null
     @ColorInt var textColor: Int? = null
-    var typeface: Typeface? = null
-        set(value) {
-            textView.typeface = value
-        }
     var text: String
         get() = textView.text.toString()
         set(value) {
@@ -52,10 +45,10 @@ class FilterItem : FrameLayout, Serializable {
             textView.text = value
         }
 
-    var circlePosition: Float = 0f
+    val circlePosition: Float
         get() = (textBackground.width / 2 + 1).toFloat()
 
-    var collapsedSize: Int = 0
+    val collapsedSize: Int
         get() = viewLeft.width
 
     var cornerRadius: Float = 100f
@@ -198,7 +191,7 @@ class FilterItem : FrameLayout, Serializable {
         color = removeAlpha(color)
         val strokeColor = if (isFilterSelected) color else removeAlpha(strokeColor)
 
-        val drawable: GradientDrawable = GradientDrawable()
+        val drawable = GradientDrawable()
         drawable.cornerRadius = cornerRadius
 
         if (color != null) {
@@ -215,8 +208,8 @@ class FilterItem : FrameLayout, Serializable {
             bottomStroke.setBackgroundColor(strokeColor)
         }
 
-        viewLeft.setBackgroundDrawable(drawable)
-        viewRight.setBackgroundDrawable(drawable)
+        ViewCompat.setBackground(viewLeft, drawable)
+        ViewCompat.setBackground(viewRight, drawable)
 
     }
 

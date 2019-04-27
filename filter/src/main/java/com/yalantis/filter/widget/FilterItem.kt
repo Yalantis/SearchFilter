@@ -3,11 +3,9 @@ package com.yalantis.filter.widget
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
@@ -16,6 +14,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.core.view.ViewCompat
 import com.yalantis.filter.R
 import com.yalantis.filter.listener.FilterItemListener
 import kotlinx.android.synthetic.main.item_filter.view.*
@@ -30,8 +32,10 @@ class FilterItem : FrameLayout, Serializable {
     var isIncreased: Boolean = false
     var startX: Float = 0f
     var startY: Float = 0f
-    @ColorInt var cancelIconTint: Int = android.R.color.white
-    @DrawableRes var cancelIcon: Int = R.drawable.ic_cancel
+    @ColorInt
+    var cancelIconTint: Int = Color.WHITE
+    @DrawableRes
+    var cancelIcon: Int = R.drawable.ic_cancel
     @ColorInt var color: Int? = null
     @ColorInt var checkedColor: Int? = null
     @ColorInt var strokeColor: Int? = null
@@ -101,7 +105,7 @@ class FilterItem : FrameLayout, Serializable {
                 viewLeft.performClick()
             }
         }
-        buttonCancel.supportBackgroundTintList = ColorStateList.valueOf(getColor(cancelIconTint))
+        ViewCompat.setBackgroundTintList(buttonCancel, ColorStateList.valueOf(cancelIconTint))
         isIncreased = true
     }
 

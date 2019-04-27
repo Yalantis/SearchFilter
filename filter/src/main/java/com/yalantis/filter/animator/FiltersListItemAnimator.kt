@@ -2,8 +2,6 @@ package com.yalantis.filter.animator
 
 import android.animation.ValueAnimator
 import androidx.core.view.ViewCompat
-import androidx.core.view.ViewPropertyAnimatorListener
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import java.util.*
@@ -14,17 +12,17 @@ import java.util.*
 class FiltersListItemAnimator : SimpleItemAnimator() {
 
     override fun isRunning(): Boolean {
-        return !mPendingAdditions.isEmpty() ||
-                !mPendingChanges.isEmpty() ||
-                !mPendingMoves.isEmpty() ||
-                !mPendingRemovals.isEmpty() ||
-                !mMoveAnimations.isEmpty() ||
-                !mRemoveAnimations.isEmpty() ||
-                !mAddAnimations.isEmpty() ||
-                !mChangeAnimations.isEmpty() ||
-                !mMovesList.isEmpty() ||
-                !mAdditionsList.isEmpty() ||
-                !mChangesList.isEmpty()
+        return mPendingAdditions.isNotEmpty() ||
+                mPendingChanges.isNotEmpty() ||
+                mPendingMoves.isNotEmpty() ||
+                mPendingRemovals.isNotEmpty() ||
+                mMoveAnimations.isNotEmpty() ||
+                mRemoveAnimations.isNotEmpty() ||
+                mAddAnimations.isNotEmpty() ||
+                mChangeAnimations.isNotEmpty() ||
+                mMovesList.isNotEmpty() ||
+                mAdditionsList.isNotEmpty() ||
+                mChangesList.isNotEmpty()
     }
 
     private val mPendingRemovals = mutableListOf<RecyclerView.ViewHolder>()
@@ -51,10 +49,10 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
 
 
     override fun runPendingAnimations() {
-        val removalsPending = !mPendingRemovals.isEmpty()
-        val movesPending = !mPendingMoves.isEmpty()
-        val changesPending = !mPendingChanges.isEmpty()
-        val additionsPending = !mPendingAdditions.isEmpty()
+        val removalsPending = mPendingRemovals.isNotEmpty()
+        val movesPending = mPendingMoves.isNotEmpty()
+        val changesPending = mPendingChanges.isNotEmpty()
+        val additionsPending = mPendingAdditions.isNotEmpty()
         if (!removalsPending && !movesPending && !additionsPending && !changesPending) {
             // nothing to animate
             return
@@ -80,7 +78,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
             }
             if (removalsPending) {
                 val view = moves[0].holder.itemView
-                ViewCompat.postOnAnimationDelayed(view, mover, getRemoveDuration())
+                ViewCompat.postOnAnimationDelayed(view, mover, removeDuration)
             } else {
                 mover.run()
             }
@@ -100,7 +98,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
             }
             if (removalsPending) {
                 val holder = changes[0].oldHolder
-                ViewCompat.postOnAnimationDelayed(holder!!.itemView, changer, getRemoveDuration())
+                ViewCompat.postOnAnimationDelayed(holder!!.itemView, changer, removeDuration)
             } else {
                 changer.run()
             }
@@ -162,7 +160,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
 
     override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
         resetAnimation(holder)
-        ViewCompat.setAlpha(holder.itemView, 0f)
+        holder.itemView.alpha = 0f
         mPendingAdditions.add(holder)
         return true
     }
@@ -190,25 +188,25 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
 
     override fun animateMove(holder: RecyclerView.ViewHolder, fromX: Int, fromY: Int,
                              toX: Int, toY: Int): Boolean {
-        var fromX = fromX
-        var fromY = fromY
+        var fx = fromX
+        var fy = fromY
         val view = holder.itemView
-        fromX += ViewCompat.getTranslationX(holder.itemView).toInt()
-        fromY += ViewCompat.getTranslationY(holder.itemView).toInt()
+        fx += holder.itemView.translationX.toInt()
+        fy += holder.itemView.translationY.toInt()
         resetAnimation(holder)
-        val deltaX = toX - fromX
-        val deltaY = toY - fromY
+        val deltaX = toX - fx
+        val deltaY = toY - fy
         if (deltaX == 0 && deltaY == 0) {
             dispatchMoveFinished(holder)
             return false
         }
         if (deltaX != 0) {
-            ViewCompat.setTranslationX(view, (-deltaX).toFloat())
+            view.translationY = (-deltaX).toFloat()
         }
         if (deltaY != 0) {
-            ViewCompat.setTranslationY(view, (-deltaY).toFloat())
+            view.translationY = (-deltaY).toFloat()
         }
-        mPendingMoves += MoveInfo(holder, fromX, fromY, toX, toY)
+        mPendingMoves += MoveInfo(holder, fx, fy, toX, toY)
         return true
     }
 
@@ -248,22 +246,22 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
             // run a move animation to handle position changes.
             return animateMove(oldHolder, fromX, fromY, toX, toY)
         }
-        val prevTranslationX = ViewCompat.getTranslationX(oldHolder.itemView)
-        val prevTranslationY = ViewCompat.getTranslationY(oldHolder.itemView)
-        val prevAlpha = ViewCompat.getAlpha(oldHolder.itemView)
+        val prevTranslationX = oldHolder.itemView.translationX
+        val prevTranslationY = oldHolder.itemView.translationY
+        val prevAlpha = oldHolder.itemView.alpha
         resetAnimation(oldHolder)
         val deltaX = (toX.toFloat() - fromX.toFloat() - prevTranslationX).toInt()
         val deltaY = (toY.toFloat() - fromY.toFloat() - prevTranslationY).toInt()
         // recover prev translation state after ending animation
-        ViewCompat.setTranslationX(oldHolder.itemView, prevTranslationX)
-        ViewCompat.setTranslationY(oldHolder.itemView, prevTranslationY)
-        ViewCompat.setAlpha(oldHolder.itemView, prevAlpha)
+        oldHolder.itemView.translationX = prevTranslationX
+        oldHolder.itemView.translationY = prevTranslationY
+        oldHolder.itemView.alpha = prevAlpha
         if (newHolder != null) {
             // carry over translation values
             resetAnimation(newHolder)
-            ViewCompat.setTranslationX(newHolder.itemView, (-deltaX).toFloat())
-            ViewCompat.setTranslationY(newHolder.itemView, (-deltaY).toFloat())
-            ViewCompat.setAlpha(newHolder.itemView, 0f)
+            newHolder.itemView.translationX = (-deltaX).toFloat()
+            newHolder.itemView.translationY = (-deltaY).toFloat()
+            newHolder.itemView.alpha = 0f
         }
         mPendingChanges += ChangeInfo(oldHolder, newHolder, fromX, fromY, toX, toY)
         return true
@@ -355,9 +353,9 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         } else {
             return false
         }
-        ViewCompat.setAlpha(item.itemView, 1f)
-        ViewCompat.setTranslationX(item.itemView, 0f)
-        ViewCompat.setTranslationY(item.itemView, 0f)
+        item.itemView.alpha = 1f
+        item.itemView.translationX = 0f
+        item.itemView.translationY = 0f
         dispatchChangeFinished(item, oldItem)
         return true
     }
@@ -370,19 +368,19 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         for (i in mPendingMoves.indices.reversed()) {
             val moveInfo = mPendingMoves[i]
             if (moveInfo.holder === item) {
-                ViewCompat.setTranslationY(view, 0f)
-                ViewCompat.setTranslationX(view, 0f)
+                view.translationY = 0f
+                view.translationX = 0f
                 dispatchMoveFinished(item)
                 mPendingMoves.removeAt(i)
             }
         }
         endChangeAnimation(mPendingChanges, item)
         if (mPendingRemovals.remove(item)) {
-            ViewCompat.setAlpha(view, 1f)
+            view.alpha = 1f
             dispatchRemoveFinished(item)
         }
         if (mPendingAdditions.remove(item)) {
-            ViewCompat.setAlpha(view, 1f)
+            view.alpha = 1f
             dispatchAddFinished(item)
         }
 
@@ -398,8 +396,8 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
             for (j in moves.indices.reversed()) {
                 val moveInfo = moves[j]
                 if (moveInfo.holder === item) {
-                    ViewCompat.setTranslationY(view, 0f)
-                    ViewCompat.setTranslationX(view, 0f)
+                    view.translationY = 0f
+                    view.translationX = 0f
                     dispatchMoveFinished(item)
                     moves.removeAt(j)
                     if (moves.isEmpty()) {
@@ -412,7 +410,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         for (i in mAdditionsList.indices.reversed()) {
             val additions = mAdditionsList[i]
             if (additions.remove(item)) {
-                ViewCompat.setAlpha(view, 1f)
+                view.alpha = 1f
                 dispatchAddFinished(item)
                 if (additions.isEmpty()) {
                     mAdditionsList.removeAt(i)
@@ -445,8 +443,8 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         for (i in count - 1 downTo 0) {
             val item = mPendingMoves[i]
             val view = item.holder.itemView
-            ViewCompat.setTranslationY(view, 0f)
-            ViewCompat.setTranslationX(view, 0f)
+            view.translationY = 0f
+            view.translationX = 0f
             dispatchMoveFinished(item.holder)
             mPendingMoves.removeAt(i)
         }
@@ -460,7 +458,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         for (i in count - 1 downTo 0) {
             val item = mPendingAdditions[i]
             val view = item.itemView
-            ViewCompat.setAlpha(view, 1f)
+            view.alpha = 1f
             dispatchAddFinished(item)
             mPendingAdditions.removeAt(i)
         }
@@ -481,8 +479,8 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
                 val moveInfo = moves[j]
                 val item = moveInfo.holder
                 val view = item.itemView
-                ViewCompat.setTranslationY(view, 0f)
-                ViewCompat.setTranslationX(view, 0f)
+                view.translationY = 0f
+                view.translationX = 0f
                 dispatchMoveFinished(moveInfo.holder)
                 moves.removeAt(j)
                 if (moves.isEmpty()) {
@@ -497,7 +495,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
             for (j in count - 1 downTo 0) {
                 val item = additions[j]
                 val view = item.itemView
-                ViewCompat.setAlpha(view, 1f)
+                view.alpha = 1f
                 dispatchAddFinished(item)
                 additions.removeAt(j)
                 if (additions.isEmpty()) {
@@ -553,14 +551,4 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         return !payloads.isEmpty() || super.canReuseUpdatedViewHolder(viewHolder, payloads)
     }
 
-    private open class VpaListenerAdapter : ViewPropertyAnimatorListener {
-        override fun onAnimationStart(view: View) {
-        }
-
-        override fun onAnimationEnd(view: View) {
-        }
-
-        override fun onAnimationCancel(view: View) {
-        }
-    }
 }

@@ -1,5 +1,6 @@
 package com.yalantis.filter.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
@@ -39,6 +40,7 @@ class CollapsedFilterContainer : RelativeLayout {
         return isEmpty || !containsEvent
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

@@ -1,5 +1,6 @@
 package com.yalantis.filter.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -31,8 +32,8 @@ class ExpandedFilterView : ViewGroup {
     constructor(context: Context, attrs: AttributeSet?, defStyleRes: Int) : super(context, attrs, defStyleRes)
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
-        if (!filters.isEmpty()) {
-            for (i in 0..childCount - 1) {
+        if (filters.isNotEmpty()) {
+            for (i in 0 until childCount) {
                 val child: View = getChildAt(i)
                 val coord: Coord? = filters[child]
 
@@ -57,27 +58,29 @@ class ExpandedFilterView : ViewGroup {
         var height: Int = mPrevHeight
 
         if (filters.isEmpty()) {
-            for (i in 0..childCount - 1) {
+            for (i in 0 until childCount) {
                 val child: FilterItem = getChildAt(i) as FilterItem
 
                 child.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
-                if (mPrevItem == null) {
-                    mPrevX = margin
-                    mPrevY = margin
-                    height = child.measuredHeight + margin
-                } else if (canPlaceOnTheSameLine(child)) {
-                    mPrevX = mPrevX!! + mPrevItem!!.measuredWidth + margin / 2
-                } else {
-                    mPrevX = margin
-                    mPrevY = mPrevY!! + mPrevItem!!.measuredHeight + margin / 2
-                    height += child.measuredHeight + margin / 2
+                when {
+                    mPrevItem == null -> {
+                        mPrevX = margin
+                        mPrevY = margin
+                        height = child.measuredHeight + margin
+                    }
+                    canPlaceOnTheSameLine(child) -> mPrevX = mPrevX!! + mPrevItem!!.measuredWidth + margin / 2
+                    else -> {
+                        mPrevX = margin
+                        mPrevY = mPrevY!! + mPrevItem!!.measuredHeight + margin / 2
+                        height += child.measuredHeight + margin / 2
+                    }
                 }
 
                 mPrevItem = child
 
                 if (filters.size < childCount) {
-                    filters.put(child, Coord(mPrevX!!, mPrevY!!))
+                    filters[child] = Coord(mPrevX!!, mPrevY!!)
                 }
             }
             height = if (height > 0) height + margin else 0
@@ -92,6 +95,7 @@ class ExpandedFilterView : ViewGroup {
                 calculateSize(heightMeasureSpec, calculateDesiredHeight()))
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

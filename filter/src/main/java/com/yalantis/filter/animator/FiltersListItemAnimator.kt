@@ -423,7 +423,8 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
     }
 
     private fun resetAnimation(holder: RecyclerView.ViewHolder) {
-        AnimatorCompatHelper.clearInterpolator(holder.itemView)
+        val defaultInterpolator = ValueAnimator().interpolator
+        holder.itemView.animate().interpolator = defaultInterpolator
         endAnimation(holder)
     }
 

@@ -2,6 +2,7 @@ package com.yalantis.filter.widget
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -18,11 +19,7 @@ import com.yalantis.filter.model.Coord
 import com.yalantis.filter.model.FilterModel
 import kotlinx.android.synthetic.main.collapsed_container.view.*
 import kotlinx.android.synthetic.main.filter.view.*
-import java.io.Serializable
 import java.util.*
-import android.content.res.TypedArray
-import android.graphics.Color
-import android.support.annotation.ColorInt
 
 
 /**
@@ -36,29 +33,7 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
     var noSelectedItemText: String = ""
         set(value) {
             collapsedText.text = value
-        }
-    var textToReplaceArrow: String = ""
-        set(value) {
-            collapseView.setText(value)
-        }
-
-    var replaceArrowByText: Boolean = false
-        set(value) {
-            collapseView.setHasText(value)
-        }
-
-    var collapsedBackground: Int = Color.WHITE
-        set(value) {
             field = value
-            collapsedContainer.containerBackground = value
-            collapsedContainer.invalidate()
-        }
-
-    var expandedBackground: Int = Color.WHITE
-        set(value) {
-            field = value
-            expandedFilter.setBackgroundColor(value)
-            expandedFilter.invalidate()
         }
 
     private var mIsBusy = false
@@ -281,7 +256,7 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
         if (mItems.contains(item)) {
             mSelectedItems.add(filter)
         }
-        mSelectedFilters.put(item, Coord(item.x.toInt(), item.y.toInt()))
+        mSelectedFilters[item] = Coord(item.x.toInt(), item.y.toInt())
         listener?.onFilterSelected(filter)
     }
 
@@ -299,7 +274,7 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
         if (coord != null && collapsedFilter.removeItem(item)) {
             mSelectedFilters.remove(item)
             mSelectedItems.remove(mItems[item])
-            mRemovedFilters.put(item, coord)
+            mRemovedFilters[item] = coord
 
             postDelayed({
                 remove(item)
@@ -349,15 +324,12 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
             putBoolean(STATE_COLLAPSED, isCollapsed!!)
             val selected = mSelectedItems
             val removed = mRemovedItems
-            if (selected is Serializable) {
-                putSerializable(STATE_SELECTED, selected)
-            }
-            if (removed is Serializable) {
-                putSerializable(STATE_REMOVED, removed)
-            }
+            putSerializable(STATE_SELECTED, selected)
+            putSerializable(STATE_REMOVED, removed)
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
             super.onRestoreInstanceState(state.getParcelable(STATE_SUPER))

@@ -1,12 +1,12 @@
 package com.yalantis.fitfilter;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -55,7 +55,7 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mRecyclerView.setAdapter(mAdapter = new QuestionsAdapter(this, mAllQuestions = getQuestions()));
         mRecyclerView.setItemAnimator(new FiltersListItemAnimator());
     }

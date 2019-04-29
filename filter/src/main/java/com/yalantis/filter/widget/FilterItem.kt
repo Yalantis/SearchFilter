@@ -2,20 +2,19 @@ package com.yalantis.filter.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Typeface
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import com.yalantis.filter.R
 import com.yalantis.filter.listener.FilterItemListener
 import kotlinx.android.synthetic.main.item_filter.view.*
@@ -30,17 +29,15 @@ class FilterItem : FrameLayout, Serializable {
     var isIncreased: Boolean = false
     var startX: Float = 0f
     var startY: Float = 0f
-    @ColorInt var cancelIconTint: Int = android.R.color.white
-    @DrawableRes var cancelIcon: Int = R.drawable.ic_cancel
+    @ColorInt
+    var cancelIconTint: Int = Color.WHITE
+    @DrawableRes
+    var cancelIcon: Int = R.drawable.ic_cancel
     @ColorInt var color: Int? = null
     @ColorInt var checkedColor: Int? = null
     @ColorInt var strokeColor: Int? = null
     @ColorInt var checkedTextColor: Int? = null
     @ColorInt var textColor: Int? = null
-    var typeface: Typeface? = null
-        set(value) {
-            textView.typeface = value
-        }
     var text: String
         get() = textView.text.toString()
         set(value) {
@@ -48,10 +45,10 @@ class FilterItem : FrameLayout, Serializable {
             textView.text = value
         }
 
-    var circlePosition: Float = 0f
+    val circlePosition: Float
         get() = (textBackground.width / 2 + 1).toFloat()
 
-    var collapsedSize: Int = 0
+    val collapsedSize: Int
         get() = viewLeft.width
 
     var cornerRadius: Float = 100f
@@ -101,7 +98,7 @@ class FilterItem : FrameLayout, Serializable {
                 viewLeft.performClick()
             }
         }
-        buttonCancel.supportBackgroundTintList = ColorStateList.valueOf(getColor(cancelIconTint))
+        ViewCompat.setBackgroundTintList(buttonCancel, ColorStateList.valueOf(cancelIconTint))
         isIncreased = true
     }
 
@@ -194,7 +191,7 @@ class FilterItem : FrameLayout, Serializable {
         color = removeAlpha(color)
         val strokeColor = if (isFilterSelected) color else removeAlpha(strokeColor)
 
-        val drawable: GradientDrawable = GradientDrawable()
+        val drawable = GradientDrawable()
         drawable.cornerRadius = cornerRadius
 
         if (color != null) {
@@ -211,8 +208,8 @@ class FilterItem : FrameLayout, Serializable {
             bottomStroke.setBackgroundColor(strokeColor)
         }
 
-        viewLeft.setBackgroundDrawable(drawable)
-        viewRight.setBackgroundDrawable(drawable)
+        ViewCompat.setBackground(viewLeft, drawable)
+        ViewCompat.setBackground(viewRight, drawable)
 
     }
 

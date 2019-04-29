@@ -5,6 +5,6 @@ package com.yalantis.filter
  */
 object Constant {
 
-    val ANIMATION_DURATION: Long = 400
+    const val ANIMATION_DURATION: Long = 400
 
 }

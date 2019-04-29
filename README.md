@@ -15,7 +15,7 @@ Read how we did it [on our blog](https://yalantis.com/blog/develop-filter-animat
 <img src="gif/dribbble.gif"/>
 
 ##Requirements
-- Android SDK 18+
+- Android SDK 19+
 
 ##Usage
 
@@ -42,17 +42,17 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -63,7 +63,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
@@ -78,7 +78,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentRight="true"
@@ -88,8 +88,8 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
 
             </RelativeLayout>
 
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -97,7 +97,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
         android:background="#E4E6E3"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@ Firstly you need to place `Filter` above your `RecyclerView` in the layout file
             android:layout_height="wrap_content" />
 
     </FrameLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 ```
 

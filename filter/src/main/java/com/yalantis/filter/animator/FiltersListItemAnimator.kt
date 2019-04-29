@@ -186,16 +186,17 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }.start()
     }
 
+    @Suppress("NAME_SHADOWING")
     override fun animateMove(holder: RecyclerView.ViewHolder, fromX: Int, fromY: Int,
                              toX: Int, toY: Int): Boolean {
-        var fx = fromX
-        var fy = fromY
+        var fromX = fromX
+        var fromY = fromY
         val view = holder.itemView
-        fx += holder.itemView.translationX.toInt()
-        fy += holder.itemView.translationY.toInt()
+        fromX += holder.itemView.translationX.toInt()
+        fromY += holder.itemView.translationY.toInt()
         resetAnimation(holder)
-        val deltaX = toX - fx
-        val deltaY = toY - fy
+        val deltaX = toX - fromX
+        val deltaY = toY - fromY
         if (deltaX == 0 && deltaY == 0) {
             dispatchMoveFinished(holder)
             return false
@@ -206,7 +207,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         if (deltaY != 0) {
             view.translationY = (-deltaY).toFloat()
         }
-        mPendingMoves += MoveInfo(holder, fx, fy, toX, toY)
+        mPendingMoves += MoveInfo(holder, fromX, fromY, toX, toY)
         return true
     }
 

@@ -324,12 +324,8 @@ class Filter<T : FilterModel> : FrameLayout, FilterItemListener, CollapseListene
             putBoolean(STATE_COLLAPSED, isCollapsed!!)
             val selected = mSelectedItems
             val removed = mRemovedItems
-            if (true) {
-                putSerializable(STATE_SELECTED, selected)
-            }
-            if (true) {
-                putSerializable(STATE_REMOVED, removed)
-            }
+            putSerializable(STATE_SELECTED, selected)
+            putSerializable(STATE_REMOVED, removed)
         }
     }
 

@@ -20,9 +20,7 @@ import kotlinx.android.synthetic.main.collapsed_container.view.*
 import kotlinx.android.synthetic.main.filter.view.*
 import java.io.Serializable
 import java.util.*
-import android.content.res.TypedArray
 import android.graphics.Color
-import android.support.annotation.ColorInt
 
 
 /**

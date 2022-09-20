@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.7.10"
     }
 }
 
@@ -16,12 +16,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 33
+    buildToolsVersion "20.0.3"
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 24
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -35,7 +35,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:24.2.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
-    implementation 'com.android.support:design:24.2.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "com.google.android.material:material:1.6.1"
 }

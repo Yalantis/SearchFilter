@@ -1,12 +1,13 @@
 package com.yalantis.fitfilter;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -16,7 +17,6 @@ import com.yalantis.filter.listener.FilterListener;
 import com.yalantis.filter.widget.Filter;
 import com.yalantis.filter.widget.FilterItem;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +152,7 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
     }
 
     @Override
-    public void onFiltersSelected(@NotNull ArrayList<Tag> filters) {
+    public void onFiltersSelected(@NonNull ArrayList<Tag> filters) {
         List<Question> newQuestions = findByTags(filters);
         List<Question> oldQuestions = mAdapter.getQuestions();
         mAdapter.setQuestions(newQuestions);
@@ -174,11 +174,11 @@ public class ExampleActivity extends AppCompatActivity implements FilterListener
 
     class Adapter extends FilterAdapter<Tag> {
 
-        Adapter(@NotNull List<? extends Tag> items) {
+        Adapter(@NonNull List<? extends Tag> items) {
             super(items);
         }
 
-        @NotNull
+        @NonNull
         @Override
         public FilterItem createView(int position, Tag item) {
             FilterItem filterItem = new FilterItem(ExampleActivity.this);

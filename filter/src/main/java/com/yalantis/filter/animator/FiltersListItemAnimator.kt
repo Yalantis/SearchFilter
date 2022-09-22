@@ -1,13 +1,13 @@
 package com.yalantis.filter.animator
 
 import android.animation.ValueAnimator
-import android.support.v4.animation.AnimatorCompatHelper
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorListener
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SimpleItemAnimator
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListener
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.SimpleItemAnimator
 import java.util.*
+
 
 /**
  * Created by irinagalata on 9/22/16.
@@ -28,23 +28,23 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
                 !mChangesList.isEmpty()
     }
 
-    private val mPendingRemovals = mutableListOf<RecyclerView.ViewHolder>()
-    private val mPendingAdditions = mutableListOf<RecyclerView.ViewHolder>()
+    private val mPendingRemovals = mutableListOf<ViewHolder>()
+    private val mPendingAdditions = mutableListOf<ViewHolder>()
     private val mPendingMoves = mutableListOf<MoveInfo>()
     private val mPendingChanges = mutableListOf<ChangeInfo>()
 
-    private val mAdditionsList = mutableListOf<ArrayList<RecyclerView.ViewHolder>>()
+    private val mAdditionsList = mutableListOf<ArrayList<ViewHolder>>()
     private val mMovesList = mutableListOf<ArrayList<MoveInfo>>()
     private val mChangesList = mutableListOf<ArrayList<ChangeInfo>>()
 
-    private val mAddAnimations = mutableListOf<RecyclerView.ViewHolder>()
-    private val mMoveAnimations = mutableListOf<RecyclerView.ViewHolder>()
-    private val mRemoveAnimations = mutableListOf<RecyclerView.ViewHolder>()
-    private val mChangeAnimations = mutableListOf<RecyclerView.ViewHolder>()
+    private val mAddAnimations = mutableListOf<ViewHolder>()
+    private val mMoveAnimations = mutableListOf<ViewHolder>()
+    private val mRemoveAnimations = mutableListOf<ViewHolder>()
+    private val mChangeAnimations = mutableListOf<ViewHolder>()
 
-    data class MoveInfo(var holder: RecyclerView.ViewHolder, var fromX: Int, var fromY: Int, var toX: Int, var toY: Int)
+    data class MoveInfo(var holder: ViewHolder, var fromX: Int, var fromY: Int, var toX: Int, var toY: Int)
 
-    data class ChangeInfo(var oldHolder: RecyclerView.ViewHolder?, var newHolder: RecyclerView.ViewHolder?,
+    data class ChangeInfo(var oldHolder: ViewHolder?, var newHolder: ViewHolder?,
                           var fromX: Int = 0,
                           var fromY: Int = 0,
                           var toX: Int = 0,
@@ -108,7 +108,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }
         // Next, add stuff
         if (additionsPending) {
-            val additions = ArrayList<RecyclerView.ViewHolder>()
+            val additions = ArrayList<ViewHolder>()
             additions.addAll(mPendingAdditions)
             mAdditionsList.add(additions)
             mPendingAdditions.clear()
@@ -132,13 +132,13 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }
     }
 
-    override fun animateRemove(holder: RecyclerView.ViewHolder): Boolean {
+    override fun animateRemove(holder: ViewHolder): Boolean {
         resetAnimation(holder)
         mPendingRemovals.add(holder)
         return true
     }
 
-    private fun animateRemoveImpl(holder: RecyclerView.ViewHolder) {
+    private fun animateRemoveImpl(holder: ViewHolder) {
         val view = holder.itemView
 
         ValueAnimator.ofFloat(0f, 300f).setDuration(300).apply {
@@ -161,14 +161,14 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }.start()
     }
 
-    override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
+    override fun animateAdd(holder: ViewHolder): Boolean {
         resetAnimation(holder)
         ViewCompat.setAlpha(holder.itemView, 0f)
         mPendingAdditions.add(holder)
         return true
     }
 
-    private fun animateAddImpl(holder: RecyclerView.ViewHolder) {
+    private fun animateAddImpl(holder: ViewHolder) {
         val view = holder.itemView
         mAddAnimations.add(holder)
 
@@ -189,7 +189,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }.start()
     }
 
-    override fun animateMove(holder: RecyclerView.ViewHolder, fromX: Int, fromY: Int,
+    override fun animateMove(holder: ViewHolder, fromX: Int, fromY: Int,
                              toX: Int, toY: Int): Boolean {
         var fromX = fromX
         var fromY = fromY
@@ -213,7 +213,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         return true
     }
 
-    private fun animateMoveImpl(holder: RecyclerView.ViewHolder, fromX: Int, fromY: Int, toX: Int, toY: Int) {
+    private fun animateMoveImpl(holder: ViewHolder, fromX: Int, fromY: Int, toX: Int, toY: Int) {
         val view = holder.itemView
         val deltaX = toX - fromX
         val deltaY = toY - fromY
@@ -242,7 +242,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }.start()
     }
 
-    override fun animateChange(oldHolder: RecyclerView.ViewHolder, newHolder: RecyclerView.ViewHolder?,
+    override fun animateChange(oldHolder: ViewHolder, newHolder: ViewHolder?,
                                fromX: Int, fromY: Int, toX: Int, toY: Int): Boolean {
         if (oldHolder === newHolder) {
             // Don't know how to run change animations when the same view holder is re-used.
@@ -326,7 +326,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }
     }
 
-    private fun endChangeAnimation(infoList: MutableList<ChangeInfo>, item: RecyclerView.ViewHolder) {
+    private fun endChangeAnimation(infoList: MutableList<ChangeInfo>, item: ViewHolder) {
         for (i in infoList.indices.reversed()) {
             val changeInfo = infoList[i]
             if (endChangeAnimationIfNecessary(changeInfo, item)) {
@@ -346,7 +346,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         }
     }
 
-    private fun endChangeAnimationIfNecessary(changeInfo: ChangeInfo, item: RecyclerView.ViewHolder): Boolean {
+    private fun endChangeAnimationIfNecessary(changeInfo: ChangeInfo, item: ViewHolder): Boolean {
         var oldItem = false
         if (changeInfo.newHolder === item) {
             changeInfo.newHolder = null
@@ -363,7 +363,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         return true
     }
 
-    override fun endAnimation(item: RecyclerView.ViewHolder) {
+    override fun endAnimation(item: ViewHolder) {
         val view = item.itemView
         // this will trigger end callback which should set properties to their target values.
         ViewCompat.animate(view).cancel()
@@ -423,8 +423,9 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         dispatchFinishedWhenDone()
     }
 
-    private fun resetAnimation(holder: RecyclerView.ViewHolder) {
-        AnimatorCompatHelper.clearInterpolator(holder.itemView)
+    private fun resetAnimation(holder: ViewHolder) {
+        val defaultInterpolator = ValueAnimator().interpolator
+        holder.itemView.animate().interpolator = defaultInterpolator
         endAnimation(holder)
     }
 
@@ -525,7 +526,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
         dispatchAnimationsFinished()
     }
 
-    internal fun cancelAll(viewHolders: List<RecyclerView.ViewHolder>) {
+    internal fun cancelAll(viewHolders: List<ViewHolder>) {
         for (i in viewHolders.indices.reversed()) {
             ViewCompat.animate(viewHolders[i].itemView).cancel()
         }
@@ -548,7 +549,7 @@ class FiltersListItemAnimator : SimpleItemAnimator() {
      *
      *
      */
-    override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder,
+    override fun canReuseUpdatedViewHolder(viewHolder: ViewHolder,
                                            payloads: List<Any>): Boolean {
         return !payloads.isEmpty() || super.canReuseUpdatedViewHolder(viewHolder, payloads)
     }

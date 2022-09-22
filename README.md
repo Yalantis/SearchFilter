@@ -10,9 +10,8 @@
 
 Check this [project on dribbble](https://dribbble.com/shots/2818273-Female-in-IT-Filters)
 
-Read how we did it [on our blog](https://yalantis.com/blog/develop-filter-animation-kotlin-android/)
-
 <img src="gif/dribbble.gif"/>
+
 
 ##Requirements
 - Android SDK 18+
@@ -32,7 +31,7 @@ allprojects {
 Add the dependency:
 ```Groovy
 dependencies {
-	  compile 'com.github.Yalantis:SearchFilter:v1.0.4'
+	  implementation 'com.github.Yalantis:SearchFilter:v1.0.5'
 }
 ```
 

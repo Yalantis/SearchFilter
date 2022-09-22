@@ -8,8 +8,8 @@ android {
         applicationId "com.yalantis.fitfilter"
         minSdkVersion 18
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.5"
     }
     buildTypes {
         release {
